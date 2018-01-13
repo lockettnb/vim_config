@@ -144,7 +144,7 @@ autocmd BufReadPre $HOME/.vim/vim_sheet.md :syntax off | :nnoremap <buffer> ,, /
 nnoremap ,c :view $HOME/.vim/vim_sheet.md<cr>
 
 " ------------------------------------------------------------
-" SECTION FOUR -- FUNCTION KEY MAPPINGS 
+" SECTION FOUR -- Function Key Mappings
 " ------------------------------------------------------------
 "   F2 - paste text from clipboard
 "   F3 - insert date
