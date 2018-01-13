@@ -1,0 +1,105 @@
+% 2017/11/27 vim cheatsheet latex
+%
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% use upquote if available, for straight quotes in verbatim environments
+\usepackage{upquote}
+
+\usepackage{geometry}
+\geometry{
+     letterpaper, 
+    left=0.5in,
+    right=0.5in,
+    top=0.75in,
+    bottom=0.75in
+}
+
+
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+
+
+\usepackage[unicode=true]{hyperref}
+\usepackage{bookmark}
+
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={$author-meta$},
+            pdftitle={$title-meta$},
+            colorlinks=true,
+            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+% this messy up hyperlinks in TOC
+% \setcounter{secnumdepth}{0}
+
+% package providing commands for selection from various title styles
+% \titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]
+% \titleformat{name=\section,numberless}[hang]{\bfseries\filright}{\thesection}{em}{}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\Large\bfseries}{\thesection}{0pt}{}
+\titleformat{\subsection}[hang]{\Large\bfseries}{\thesubsection}{0pt}{}
+\titlespacing{\section}{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\renewcommand\thesection{}
+\renewcommand\thesubsection{}
+$if(title)$
+\title{$title$}
+$endif$
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+\date{$date$}
+
+
+% ======================================================
+\begin{document}
+$if(title)$
+\maketitle
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+$body$
+
+$if(natbib)$
+$if(biblio-files)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$biblio-files$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

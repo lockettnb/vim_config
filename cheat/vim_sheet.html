@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="md.css" type="text/css" />
+</head>
+<body>
+<h1 id="vim-cheat-sheet">2017/11/28 VIM Cheat-Sheet</h1>
+<h2 id="motions">Motions</h2>
+<p>[count] {motion}</p>
+<pre><code>h j k l move cursor
+gj gk   move cursor one screen line (good of wrapped lines)
++       beginning of next/previous line 
+&lt;enter&gt; beginning of next line
+H M L   top middle bottom of screen
+w W     beginning of next word, &lt;shift&gt; --&gt;, &lt;ctrl&gt; --&gt;
+e E     end of next word
+b B     backwards to start of last word, &lt;shift&gt; &lt;--, &lt;ctrl&gt; &lt;--
+
+f F     jump to next/previous occurrence of {char}
+t T     jump to before next/previous occurrence of {char}
+;       next f/F/t/T 
+,       pervious f/F/t/T
+
+0       move to beginning of the line
+^       move to first non-blank character of the line
+g^      move to first non-blank character of the line
+
+gm      move to middle of screen
+
+$       move to end of line
+g$      move to end of line on screen
+g_      move to end last non-blank char of [count] line
+
+|       move to column [count], default is zero
+
+gg      go to the first line of the document
+G       go to line number &lt;n&gt;, default last line
+go      goto bytes
+%       goto percent
+
+{ }     jump backward/forward one paragraph
+( )     jump backward/forward one sentence
+
+]]      beginning of next function
+[[      beginning of last function
+][      end of this function --&gt; ]
+[]      end of last function [ &lt;--</code></pre>
+<p></p>
+<h2 id="editing-with-motions">Editing with Motions</h2>
+<p>{count}{command}{motion}</p>
+<p>{register}{comand}{count}{motion}</p>
+<p>{visual mode}{motion(s)}{command}</p>
+<pre><code>c  cc   change
+d  dd   delete
+y  yy   yank
+&gt;  &gt;&gt;   increase indent
+&lt;  &gt;&gt;   decrease indent
+!  !!   filter text lines throught external program:  !}fmt -72
+=  ==   filter text line through C-indenting program
+gu gugu lowercase, also guu for whole line
+gU gUgU uppercase, also gUU for whole line
+gq gqgq format, also gqq for whole line
+~       toggle case, characterwise only
+
+p P     paste
+gp gP   paste move cusor after
+x       delete character
+X       backspace delete character
+
+.      repeat command
+&amp;      repeat last substitution
+
+i I     insert
+o O     open
+a A     append
+s S     substitute char/line
+r R     replace char/line
+J       join lines
+
+v V       visual select char/line/block
+&lt;ctrl-v&gt;  visual select char/line/block
+gv        reselect last visual
+gq        format/word wrap selected text
+
+&quot;x        register x = a-z 0-9 A-Z &quot; *
+            &quot;     unnamed register (last delete)
+            0     last yank
+            1     last multi-line delete
+            2-9   last 8 deletes
+            a-z   general purpose registers text or macros
+            A-Z   append to a-z registers
+            *     operating system clipboard</code></pre>
+<p></p>
+<h2 id="editing-with-objects">Editing with Objects</h2>
+<p>{number}{cmd}{text object}</p>
+<pre><code>Objects:
+aw iw  word
+aW iW  word
+as is  sentence
+ap ip  paragraph
+a&quot; i&quot;  quote 
+a&#39; i&#39;  quote
+a` i`  quote
+a[ i[  block     or a] i]
+a( i(  block     or a) i) ab ib 
+a{ i{  block     or a} i} aB iB
+a&lt; i&lt;  block     or a&gt; i&gt;
+at it  tag
+
+Commands: v c d y &gt; &lt; ! = gu gU gq</code></pre>
+<h2 id="search-and-replace">Search and Replace</h2>
+<p>search [count]/{pattern}/{offset}</p>
+<p>substitute {range}s/old/new/{flags}</p>
+<pre><code>/pattern   search for pattern
+?pattern   search backward for pattern
+n          repeat search in same direction
+N          repeat search in opposite direction
+:noh       remove highlighting of search matches
+*          search next word under cursor
+#          search previous word under cursor
+&amp;          repeat last substition
+%          find matching bracket {} [] ()</code></pre>
+<p>:{range}s/old/new/{flags}</p>
+<pre><code>flags: g-global c-confirm i-case insensitive
+range:
+    n,m  lines n to m, ($ for last line)(. for current line)
+    %    whole buffer
+    &#39;&lt;,&#39;&gt;visual marked lines
+
+:%s/old/new/g      replace all old with new throughout file
+:.,+12s/old/new/g  replace all old with new on next 12 lines
+:1,.s/old/new/gc   from line 1 to current line with confirmations</code></pre>
+<p></p>
+<h2 id="screen-scrolling">Screen Scrolling</h2>
+<pre><code>z&lt;enter&gt;  position line on top of the screen
+zt        position line on top of the screen
+
+zz        position line on centre of the screen
+z.        position line of centre of the screen
+
+zb        poition line on bottom of the screen
+
+&lt;ctrl-f&gt;  forward one full screen       &lt;ctrl-d&gt;    forward (down) half screen
+&lt;ctrl-b&gt;  back one full screen          &lt;ctrl-u&gt;    back (up) half screen
+&lt;ctrl-e&gt;  forward one line              &lt;ctrl-y&gt;    back one line</code></pre>
+<h2 id="marks">Marks</h2>
+<pre><code>ma     set mark a at current cursor location
+&#39;a     jump to mark, first non-blank character in line
+`a     jump to mark, position line and column
+
+&#39;&#39;     jump to last jump
+&#39;.     jump to last change
+&#39;^     jump to last insert
+g;     jump to last edit, step back thru edit history
+g,     jump to next edit, step forward thru the edit history
+
+&#39;&lt;    jump to start of last visual block
+&#39;&gt;    jump to end of last visual block</code></pre>
+<h2 id="macros">Macros</h2>
+<p>:{range} normal <span class="citation">@a</span> run macro a on range of lines... :% norm <span class="citation">@f</span></p>
+<pre><code>qa  record macro a (use registers a-z)
+q   stop recording macro
+@a  run macro a
+@@  rerun last run macro</code></pre>
+<p></p>
+<h2 id="windows-and-buffers-and-tabs">Windows and Buffers and Tabs</h2>
+<pre><code>:e {file}      edit a file in a new buffer
+:bnext or :bn  go to the next buffer
+:bprev or :bp  go to the previous buffer
+:bd            delete a buffer (close a file)
+:ls            list all open buffers
+
+:sp file       open a file in a new buffer and split window
+:vsp file      open a file in a new buffer and vertically split window
+
+&lt;ctrl-w&gt;s      split window horz
+&lt;ctrl-w&gt;v      split window vertically
+&lt;ctrl-w&gt;w      switch windows
+&lt;ctrl-w&gt;c      quit a window
+
+&lt;ctrl-w&gt;h &lt;ctrl-w&gt;j &lt;ctrl-w&gt;k &lt;ctrl-w&gt;l   move to window left/down/up/right 
+
+:tabe[dit] {file}  edit file in new tab
+:tabc[lose]        close tab
+:tabn[ext]         next tab
+:tabp[revious]     previous tab
+:tabfirst          first tab
+:tabl[ast]         last tab</code></pre>
+<h2 id="file-mangement">File Mangement</h2>
+<pre><code>:e {file}  edit a file in a new buffer
+:q     quit
+:q!    quit without writing (changes discarded)
+:w     write file and keep working
+:wq    write the current file and quit
+
+:x     write current file, if modified, and quit
+ZZ     same as :x
+
+:qa    quit all
+:qa!   quit all without writing (changes discarded)
+:wa    write all changed files (buffers), and keep working
+:xa    exit all (save all changes and quit)
+
+:e .               explore files/directories
+:Explore           explore file/directories
+:browse oldfiles   recent opened files
+:r[ead] {file}     insert the file below the cursor</code></pre>
+<p></p>
+<h2 id="other-stuff">Other Stuff</h2>
+<pre><code>u         undo
+&lt;ctrl-r&gt;  redo 
+&lt;ctrl-l&gt;  redraw screen
+
+&lt;ctrl-n&gt;  autocomplete next matching word
+&lt;ctrl-p&gt;  autocomplete previous matching word
+
+&lt;ctrl-a&gt;  increment number under cursor
+&lt;ctrl-x&gt;  decrement number under cursor
+
+gf        go to file under cursor
+
+:map                    show key mappings
+:reg                    show registors
+:let @a=&quot;&quot;              clear register a
+:retab                  replace tab/whitespace to fit tabstop setting
+:set number             turn on line numbers
+:set nonumber           turn off line numbers
+:set relativenumber     turn on relative numbers
+:set norelativenumber   turn off relative numbers
+:set list               display &lt;tab&gt; &lt;space&gt; and &lt;EOL&gt; chars
+:l[ist]                 show line with control chars
+:set textwidth=80       set max text width.... ggVG gq (select all format)
+
+:set spell              turn on spelling highlighting
+:set nospell            turn off spelling
+]s                      next spelling error 
+[s                      previous spelling error
+z=                      spelling suggestions</code></pre>
+<p>{range}g[lobal]/{pattern}/yank {register}</p>
+<pre><code>    :%g/pattern/yank A   append all lines with pattern to register A
+    :%v/pattern/yank A   append all line without pattern to register A</code></pre>
+<h2 id="shell-commands">SHELL COMMANDS</h2>
+<pre><code>:! cmd        execute cmd in the shell
+:w !cmd       write the current buffer to the stdin of an external command
+:{range}!cmd  write {range} to stdin of command and replaces the buffer with output
+:r !{cmd}     execute comand and insert(read) output below the cursor
+!!{cmd}       filter line(s) thru command... !!gawk &#39;{print $1}&#39;</code></pre>
+</body>
+</html>

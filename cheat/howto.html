@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="md.css" type="text/css" />
+</head>
+<body>
+<h1 id="creating-the-vim-cheatsheet">Creating the VIM Cheatsheet</h1>
+<p>I was looking for a cheatsheet to help me remember how to use text objects in vim. I just couldn't seem to find just the right one. I decided to create my own and using markdown as the source with HTML and PDF as the output.</p>
+<p>So begins an adventure in using pandoc and latex.</p>
+<p>I have used pandoc in the past to convert markdown to HTML. It was simple to use even with a CSS style sheet. However, creating a pdf from markdown means a trip down the Latex Lane. Not for the faint of heart.</p>
+<p>Their are many site that present an introduction to Latex. They make it look so simple.</p>
+<pre><code>\documentclass[12pt]{article}
+
+\title{This is the title}
+\author{Author One \\ Author Two}
+\date{29 November 2017}
+
+\begin{document}
+\maketitle
+
+This is the content of this document.
+
+This is the 2nd paragraph.
+\end{document}</code></pre>
+<p>I started to layout my cheatsheet in markdown using the table extensions but soon found out things did not flow through latex to PDF very well. Tables were a big problem.</p>
+<p>I dropped back to going directly with Latex and soon found the options of tables to be overwhelming; table, tabular tabularx, tabu just to mention a few. I might as well write the whole thing in HTML as get lost in Latex Lane.</p>
+<p>And, again pandoc did not like these table packages. Under the hood pandoc uses the pdflatex program and a latex template to create the PDF. The template didn't support any of the Latex packages I wanted to use.</p>
+<p>Back to markdown with no tables. As for markdown-to-pdf the pandoc latex template created weird margins and sections numbers. However pandoc allows you to supply your own template. With lots of Latex investigation I created a Latex template and was able to successfully pass it to pandoc to create the PDF format I wanted.</p>
+<p>The document flow is:</p>
+<ul>
+<li><p>create the source document in Markdown with indents for code blocks</p></li>
+<li><p>convert from Markdown to HTML with pandoc and a CSS style sheet<br /> $ pandoc -s -c md.css -f markdown -t html -o vim_sheet.html vim_sheet.md</p></li>
+<li><p>convert from Markdown to PDF with pandoc using pdflatex and latex template<br /> $ pandoc -s -f markdown -t latex --template=cheat.tex -o vim_sheet.tex vim_sheet.md</p></li>
+<li><p>for debugging convert from Markdown to LATEX to PDF in a two-step process<br /> $ pandoc -s -f markdown -t latex --template=cheat.tex -o vim_sheet.tex vim_sheet.md<br /> $ pdflatex vim_sheet.tex</p></li>
+</ul>
+<p>Sample of the source Markdown document</p>
+<pre><code>Motions
+-------
+[count] {motion}
+
+    h j k l move cursor
+    gj gk   move cursor one screen line (good of wrapped lines)
+    +       beginning of next/previous line 
+    &lt;enter&gt; beginning of next line
+    H M L   top middle bottom of screen
+    w W     beginning of next word, &lt;shift&gt; --&gt;, &lt;ctrl&gt; --&gt;
+    e E     end of next word
+    b B     backwards to start of last word, &lt;shift&gt; &lt;--, &lt;ctrl&gt; &lt;--</code></pre>
+<h2 id="latex-template">Latex Template</h2>
+<p>When I created the Latex template (cheat.tex) I wanted to control the margins and have section/subsection headers with no numbers. I started with the pandoc Latex template by;</p>
+<pre><code>$ pandoc -D latex &gt; cheat.tex</code></pre>
+<p>I deleted a bunch of the preamble in the template then added margin control using the geometry package.</p>
+<pre><code>\usepackage{geometry}
+\geometry{
+     letterpaper, 
+    left=0.5in,
+    right=0.5in,
+    top=0.75in,
+    bottom=0.75in
+}</code></pre>
+<p>I also added section formatting using the titlesec package.</p>
+<pre><code>\usepackage{titlesec}
+
+\titleformat{\section}[hang]{\Large\bfseries}{\thesection}{0pt}{}
+\titleformat{\subsection}[hang]{\Large\bfseries}{\thesubsection}{0pt}{}
+
+\titlespacing{\section}{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\renewcommand\thesection{}
+\renewcommand\thesubsection{}</code></pre>
+<p>The tricky bit here is that to get rid of section/subsection numbers. This is done by redefining and as empty.</p>
+<p>Normally is defined as {}, in other words a number. By setting it to empty {} it will not show the section number. In normal Latex we would simple use the numberless \section* instead of \section but with pandoc filling in the body of the tex document this is not an option.</p>
+<h2 id="all-the-files">All the Files</h2>
+<p>This is all wrapped up in a makefile, so &quot;make html&quot; and &quot;make pdf&quot; produce the final documents.</p>
+<p>Source Document<br /><a href="vim_sheet.md">Markdown File</a></p>
+<p>Styling Templates --(used by pandoc during the document built<br /><a href="md.css">CSS Style Sheet</a><br /><a href="cheat.tex">Latex Template File</a></p>
+<p>Makefile for building output documents<br /> targets = html, pdf, twostep, viewhtml, viewpdf, clean, superclean, doc <a href="Makefile">Makefile</a></p>
+<p>Output Documents<br /><a href="vim_sheet.html">HTML Document</a><br /><a href="vim_sheet.pdf">PDF Document</a><br /><a href="vim_sheet.tex">Intermediate Latex Document</a></p>
+<p><a href="howto.md">Build Workflow HowTo</a> (this document)</p>
+<h2 id="latexpandoc-install">Latex/Pandoc Install</h2>
+<p>I didn't install the full Latex system. It is huge. I only installed the Ubuntu recommend package and one extra package.</p>
+<p>I'm running Linux Mint so here are the commands</p>
+<pre><code>$ sudo apt-get install pandoc
+$ sudo apt-get install texlive 
+$ sudo apt-get install texlive-latex-extra</code></pre>
+<p>2017/11/28</p>
+</body>
+</html>

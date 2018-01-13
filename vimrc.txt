@@ -1,0 +1,186 @@
+"
+" 2014/02/19 created
+" 2014/04/16 added keymaps for clipboard cut paste
+" 2014/04/18 added makefile fix for tabs
+" 2014/04/22 added macro and buffer shortcuts
+" 2014/04/27 added bunch of items from Steve Losh blog
+" 2014/11/29 added leader c to  insert c code comment and readded jj
+" 2015/01/25 added column 81 highlight changed semicolon mapping
+" 2015/03/31 added F4 to underline title with ='s
+" 2015/04/17 moved F5 to F8, added F5 to underline title with -'s
+" 2016/01/03 added F7 to preview markdown files in firefox
+" 2016/01/25 added relativenumbers 
+" 2016/02/03 added new relativenumber script (25 years tomorrow!!)
+" 2017/01/04 embedded the toggle number script and added nobackup setting
+" 2017/01/22 added no modline based on Slackware adventures
+" 2017/11/16 misc cleanup
+" 2017/12/13 added cheatsheet shortcuts
+
+" ------------------------------------------------------------
+" SECTION ONE -- Options
+" ------------------------------------------------------------
+
+" vim not vi
+set nocompatible
+set mouse=a
+set nobackup
+" set nowrap
+set nomodeline
+set textwidth=0
+
+" search case 
+" all-lowercase string your search will be case-insensitive
+" any characters in uppercase the search will be case-sensitive 
+set ignorecase
+set smartcase
+
+" highlight search results (as you type) 
+" <leader><space> mapping makes it easy to hide search results
+" This gets rid of the distracting highlighting once you done with it
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :nohlsearch<cr>
+
+" just the 81st column of wide lines
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
+" expand tab to 4 spaces 
+"   .....use :retab to fix up old files
+" use tabs in makefiles, no expandtab 
+set tabstop=4
+set shiftwidth=4
+set expandtab
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+
+" always have an extra line on bottom and top
+set scrolloff=1
+
+" allow dirty buffers to be hidden
+set hidden
+
+" hidden characters tabs, spaces, eol
+exec "set listchars=tab:\ubb\ubb,eol:\ub6,trail:\ub7"
+
+" ------------------------------------------------------------
+" SECTION TWO -- Functions
+" ------------------------------------------------------------
+" 2017/01/04 decided to include the script in this file instead of sourcing it
+" source ~/.vim/tognums.vim
+
+function! Tognums()
+" tri-toggle number,relativenumber, and list
+if &number
+    set nonumber
+    set norelativenumber
+    set nolist
+elseif &relativenumber
+    set number
+    set norelativenumber
+    set list
+else
+    set nonumber
+    set relativenumber
+    set list
+endif
+
+endfunction
+
+function! Togmouse()
+" toggle mouse on/off
+if &mouse == 'a'
+    set mouse=
+    echo "Mouse Off"
+else
+    set mouse=a
+    echo "Mouse On"
+endif
+endfunction
+
+" ------------------------------------------------------------
+" SECTION THREE -- Key Mappings
+" ------------------------------------------------------------
+" FEW KEY ADJUSTMENTS
+" extra escape key
+inoremap jj <ESC>
+" extra eol
+nnoremap \\ $
+nnoremap L $
+" quick quit w/o write
+nnoremap QQ :q!<cr>
+
+" make colon commands easier 2017/11/18 REMOVED
+" I never use this, too use to semi-colon
+" nnoremap ; :
+" vnoremap ; :
+
+" MISC SHORTCUTS
+"  n=numbers and show hidden chars
+"  s=spell
+"  c=C comment 
+"  C=shell comment 
+nnoremap <leader>m :call Togmouse()<CR>
+nnoremap <leader>n :call Tognums()<CR>
+nnoremap <leader>s :set spell!<CR>
+nnoremap <leader>c <ESC>0i// <ESC><CR>
+nnoremap <leader>C <ESC>0i# <ESC><CR>
+" nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
+
+" latex shortcuts
+nnoremap <leader>p :w<cr>:!make pdf<cr><cr> 
+
+" using register f for quick macros and shortcuts \f 
+" record quick macros into reg f .... qf<keystrokes>q
+" then use \f to execute
+nnoremap <leader>f @f
+
+" buffer shortcuts 
+nnoremap <leader>b :bn<cr>
+nnoremap <leader>w <c-w><c-w>
+
+" cheatsheet shortcuts
+autocmd BufReadPre $HOME/.vim/vim_sheet.md :syntax off | :nnoremap <buffer> ,, /^----<cr>:nohl<cr>zt |  nnoremap <buffer> ,c :syntax on<cr>:bd!<cr>
+nnoremap ,c :view $HOME/.vim/vim_sheet.md<cr>
+
+" ------------------------------------------------------------
+" SECTION FOUR -- FUNCTION KEY MAPPINGS 
+" ------------------------------------------------------------
+"   F2 - paste text from clipboard
+"   F3 - insert date
+"   F4 - underline title with =
+"   F5 - underline title with - 
+"   F6 - wrap paragraph
+"   F7 - preview markdown
+"   F8 - start browswer with URL under cursor
+
+" nmap <c-v> "+gP, bad idea as <ctrl-v> is used for block mode visual
+nmap <F2> "+gPA<ESC>
+imap <F2> <ESC>"+gPA<ESC>
+"
+" f3 insert todays date
+nnoremap <F3> "=strftime("%Y/%m/%d")<CR>P
+inoremap <F3> <C-R>=strftime("%Y/%m/%d")<CR> 
+"
+" f4 & f5 MARKDOWN underlines
+nmap <F4> 0yypv$r=
+nmap <F5> 0yypv$r-
+"
+" reformt paragraph
+" this is pretty stupid and should be fixed
+nmap <F6> mZ{V}gq`Z
+"
+"
+" ------------------------------------------------------------
+" STRANGE STUFF
+" ------------------------------------------------------------
+" preview markdown
+" you need a makefile in the directory to convert md to html 
+nmap <F7> :w<CR>:!make preview PREVIEW=% &<CR><CR>:sleep 500m<CR><C-l>
+"
+" f8 start browser with the URL under the cursor
+" used in the reading list file to start browser
+nmap <F8> :.,.w !xargs -I {} firefox {} & <cr><cr>
+
+
+
