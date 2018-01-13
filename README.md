@@ -42,6 +42,9 @@ vim_sheet.md to other formats.
 
 Scripts
 -------
+A few scripts that I use occasionally so they are not installed in my .vim
+directory.  I usually just :souce these files when I want to use one of these
+scripts.
 
 scripts/camel.vim   -- move around camel style and delete/yank/copy camel text objects  
 scripts/box.vim     -- draw text boxes using the arrow keys  
