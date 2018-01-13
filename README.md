@@ -3,6 +3,16 @@ Vim Configuration/Setup
 This is my personal vim setup.  My vimrc is here along
 with my vim cheatsheet and a couple vim scripts.
 
+Cheatsheet
+----------
+The cheat directory has my personal cheatsheeti (vim_sheet.md).  Must be
+getting old as I find I need help remember vim bits. I have this linked to a
+key mapping ,c to quickly display it in the middle of a vim session.
+
+The make file need pandoc (html) and pdflatex (pdf) installed to convert the source file
+vim_sheet.md to other formats.
+
+
 Scripts
 -------
 
