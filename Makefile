@@ -6,6 +6,7 @@
 CHEAT=vim_sheet.md
 CONF = vimrc.txt
 # SCRIPTS = tognums.vim
+SCRIPTS = snip.vim quotes.vim
 
 
 all: vim
@@ -13,6 +14,8 @@ all: vim
 vim:
 	cp $(CONF) $(HOME)/.vimrc
 	cp cheat/$(CHEAT) $(HOME)/.vim/$(CHEAT)
+	cp ./scripts/snip.vim $(HOME)/.vim/
+	cp ./scripts/quotes.vim $(HOME)/.vim/
 
 remove:
 	rm $(HOME)/.vimrc

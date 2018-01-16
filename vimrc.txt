@@ -53,6 +53,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+autocmd FileType c :source $HOME/.vim/snip.vim
 
 " always have an extra line on bottom and top
 set scrolloff=1
@@ -144,6 +145,10 @@ nnoremap <leader>w <c-w><c-w>
 " cheatsheet shortcuts
 autocmd BufReadPre $HOME/.vim/vim_sheet.md :syntax off | :nnoremap <buffer> ,, /^----<cr>:nohl<cr>zt |  nnoremap <buffer> ,c :syntax on<cr>:bd!<cr>
 nnoremap ,c :view $HOME/.vim/vim_sheet.md<cr>
+
+" external script and mappings,  <leader> q for quoting a visual selection
+source $HOME/.vim/quotes.vim
+
 
 " ------------------------------------------------------------
 " SECTION FOUR -- Function Key Mappings

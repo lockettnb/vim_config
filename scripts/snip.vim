@@ -21,6 +21,7 @@ iab <silent> <buffer> ifelse if (){<CR><CR>} else {<CR><CR>}<ESC>?)<CR>:nohl<CR>
 iab <silent> <buffer> else else {<CR>x;<CR>}<ESC>?x;<CR><Del><Del>:nohl<CR>i<c-r>=Eatchar()<CR>
 
 iab <silent> <buffer> intmain int main(int argc, char **argv)<CR>{<CR>x;<CR><tab>return 0;<CR>}<CR><ESC>?x;<CR><Del><Del>:nohl<CR>i<c-r>=Eatchar()<CR>
+iab <silent> <buffer> intfun int xx( )<CR>{<CR><CR><tab>return 0;<CR>}<CR><ESC>?xx<CR><Del><Del>:nohl<CR>i<c-r>=Eatchar()<CR>
 
 
 " NOTES:
