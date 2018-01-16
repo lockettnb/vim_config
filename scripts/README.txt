@@ -4,7 +4,7 @@ Notes on vim Scripts
 
 box.vim
 -------
-Use arrow keys to draw boxes using the  unicode box characters.
+Use arrow keys to draw boxes using the  Unicode box characters.
 These mappings are all buffer specific.
 
 \s  -- create a scratchpad for drawing boxes
@@ -12,8 +12,8 @@ These mappings are all buffer specific.
 \a  -- leftover from testing; show unicode value of char under cursor
        http://derekwyatt.org/2015/07/27/getting-character-under-cursor-in-vim/
 
-<up>    -- vertial 0x2502 or 0x2518 or 0x2514
-<down>  -- vertial 02502 or 0x2510 or 0x250c
+<up>    -- vertical 0x2502 or 0x2518 or 0x2514
+<down>  -- vertical 02502 or 0x2510 or 0x250c
 <right> -- horizontal 0x2500 or 0x250C or 0x2514
 <left>  -- horizontal 0x2500 or 0x2510 or 0x2518
 
@@ -55,17 +55,19 @@ Still underdevelopment
 snip.vim
 --------
 Snippets for C programs.  Loaded for editing c files via autocmd in vimrc.
+They all start with i for insert except the fori abbreviation.
+Think of them as insert-def, insert-if etc etc
 
-    #d      -- define
-    #i      -- include
-    if      -- if statement
-    ifelse  -- if then else statement
-    else    -- else claus
-    for     -- for statement
-    fori    -- for statement with i index
-    while   -- while statement
-    intmain -- main function
-    intfun  -- function
+    idef     -- define
+    iinc     -- include
+    iif      -- if statement
+    iifelse  -- if then else statement
+    ielse    -- else clause
+    ifor     -- for statement
+    fori     -- for statement with i index
+    iwhile   -- while statement
+    imain    -- main function
+    ifun     -- function
 
 
 
