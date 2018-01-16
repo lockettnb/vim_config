@@ -67,37 +67,10 @@ exec "set listchars=tab:\ubb\ubb,eol:\ub6,trail:\ub7"
 " ------------------------------------------------------------
 " SECTION TWO -- Functions
 " ------------------------------------------------------------
-" 2017/01/04 decided to include the script in this file instead of sourcing it
-" source ~/.vim/tognums.vim
-
-function! Tognums()
-" tri-toggle number,relativenumber, and list
-if &number
-    set nonumber
-    set norelativenumber
-    set nolist
-elseif &relativenumber
-    set number
-    set norelativenumber
-    set list
-else
-    set nonumber
-    set relativenumber
-    set list
-endif
-
-endfunction
-
-function! Togmouse()
-" toggle mouse on/off
-if &mouse == 'a'
-    set mouse=
-    echo "Mouse Off"
-else
-    set mouse=a
-    echo "Mouse On"
-endif
-endfunction
+" <leader>n for numbers toggle, and <leader>m for mouse toggle
+source $HOME/.vim/toggle.vim
+" <leader> q for quoting a visual selection
+source $HOME/.vim/quotes.vim
 
 " ------------------------------------------------------------
 " SECTION THREE -- Key Mappings
@@ -123,11 +96,13 @@ nnoremap QQ :q!<cr>
 "  s=spell
 "  c=C comment 
 "  C=shell comment 
+"  q=quote visual selection
 nnoremap <leader>m :call Togmouse()<CR>
 nnoremap <leader>n :call Tognums()<CR>
 nnoremap <leader>s :set spell!<CR>
 nnoremap <leader>c <ESC>0i// <ESC><CR>
 nnoremap <leader>C <ESC>0i# <ESC><CR>
+vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
 
 " latex shortcuts
@@ -146,8 +121,6 @@ nnoremap <leader>w <c-w><c-w>
 autocmd BufReadPre $HOME/.vim/vim_sheet.md :syntax off | :nnoremap <buffer> ,, /^----<cr>:nohl<cr>zt |  nnoremap <buffer> ,c :syntax on<cr>:bd!<cr>
 nnoremap ,c :view $HOME/.vim/vim_sheet.md<cr>
 
-" external script and mappings,  <leader> q for quoting a visual selection
-source $HOME/.vim/quotes.vim
 
 
 " ------------------------------------------------------------

@@ -25,7 +25,8 @@ function! QuoteIt()
 
 endfunction
 
-vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
+" moved this to my vimrc 
+" vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
 
 " NOTES
 "     let cc = char2nr(matchstr(getline('.'), '\%' . col('.') . 'c.'))
