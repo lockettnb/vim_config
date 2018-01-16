@@ -50,7 +50,25 @@ quotes.vim
 ----------
 Still underdevelopment
 
-\t  -- t for test, quote the visually selected section
+\q  -- quote the visually selected section
+
+snip.vim
+--------
+Snippets for C programs.  Loaded for editing c files via autocmd in vimrc.
+
+    #d      -- define
+    #i      -- include
+    if      -- if statement
+    ifelse  -- if then else statement
+    else    -- else claus
+    for     -- for statement
+    fori    -- for statement with i index
+    while   -- while statement
+    intmain -- main function
+    intfun  -- function
+
+
+
 
 
 
