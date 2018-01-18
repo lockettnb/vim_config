@@ -35,12 +35,13 @@ set ignorecase
 set smartcase
 
 " highlight search results (as you type) 
-" <leader><space> mapping makes it easy to hide search results
+" <leader>\ mapping makes it easy to hide search results
 " This gets rid of the distracting highlighting once you done with it
+" I seem to use this a lot so changed it to \\ for quick double tap
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :nohlsearch<cr>
+nnoremap <leader>\ :nohlsearch<cr>
 
 " just the 81st column of wide lines
 highlight ColorColumn ctermbg=magenta
@@ -79,7 +80,6 @@ source $HOME/.vim/quotes.vim
 " extra escape key
 inoremap jj <ESC>
 " extra eol
-nnoremap \\ $
 nnoremap L $
 " I liked the remap of L so much I thought I would try H
 nnoremap H 0
