@@ -65,6 +65,10 @@ set hidden
 " hidden characters tabs, spaces, eol
 exec "set listchars=tab:\ubb\ubb,eol:\ub6,trail:\ub7"
 
+" statusline
+set laststatus=2
+set statusline=%f%m%=%l:%-9c\ Lines:%-9L%5p%%
+highlight statusLine cterm=NONE ctermfg=7 ctermbg=4
 " ------------------------------------------------------------
 " SECTION TWO -- Functions
 " ------------------------------------------------------------
@@ -115,6 +119,7 @@ nnoremap <leader>f @f
 
 " buffer shortcuts 
 nnoremap <leader>b :bn<cr>
+nnoremap <leader><space> :bn<cr>
 nnoremap <leader>w <c-w><c-w>
 
 " cheatsheet shortcuts
