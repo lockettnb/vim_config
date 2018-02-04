@@ -147,6 +147,7 @@ substitute  {range}s/old/new/{flags}
         '<,'>visual marked lines
 
     :%s/old/new/g      replace all old with new throughout file
+    :%s//new/g         replace last search item with new
     :.,+12s/old/new/g  replace all old with new on next 12 lines
     :1,.s/old/new/gc   from line 1 to current line with confirmations
 

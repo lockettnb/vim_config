@@ -90,6 +90,10 @@ nnoremap H 0
 " quick quit w/o write
 nnoremap QQ :q!<cr>
 
+" C function jumps, with adjustments
+nnoremap [[ [[z<cr>kj
+nnoremap ]] ]]z<cr>kj
+
 " make colon commands easier 2017/11/18 REMOVED
 " I never use this, too use to semi-colon
 " nnoremap ; :
