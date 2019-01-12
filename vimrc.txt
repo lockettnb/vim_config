@@ -15,6 +15,7 @@
 " 2017/01/22 added no modline based on Slackware adventures
 " 2017/11/16 misc cleanup
 " 2017/12/13 added cheatsheet shortcuts
+" 2018/12/15 mapped plus (+) to insert one space
 
 " ------------------------------------------------------------
 " SECTION ONE -- Options
@@ -84,11 +85,13 @@ source $HOME/.vim/quotes.vim
 " extra escape key
 inoremap jj <ESC>
 " extra eol
-nnoremap L $
-" I liked the remap of L so much I thought I would try H
-nnoremap H 0
+"    2019/01/12 changed from L to K as I wanted L back
+"    normally K finds the man page for word under the cursor
+nnoremap K $
 " quick quit w/o write
 nnoremap QQ :q!<cr>
+" insert one space, love this one
+nnoremap + i <ESC>
 
 " C function jumps, with adjustments
 nnoremap [[ [[z<cr>kj
