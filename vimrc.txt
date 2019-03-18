@@ -16,7 +16,9 @@
 " 2017/11/16 misc cleanup
 " 2017/12/13 added cheatsheet shortcuts
 " 2018/12/15 mapped plus (+) to insert one space
-
+" 2019/02/13 autocmd for leader c comments in C files
+" 2019/03/18 added /p and /y for system clipboard put & yank
+"
 " ------------------------------------------------------------
 " SECTION ONE -- Options
 " ------------------------------------------------------------
@@ -56,6 +58,7 @@ set shiftwidth=4
 set expandtab
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType c :source $HOME/.vim/snip.vim
+autocmd FileType c nnoremap <leader>c <ESC>0i// <ESC><CR>
 
 " always have an extra line on bottom and top
 set scrolloff=1
@@ -108,16 +111,16 @@ nnoremap ]] ]]z<cr>kj
 "  c=C comment 
 "  C=shell comment 
 "  q=quote visual selection
+"  t=tidy current table
 nnoremap <leader>m :call Togmouse()<CR>
 nnoremap <leader>n :call Tognums()<CR>
 nnoremap <leader>s :set spell!<CR>
-nnoremap <leader>c <ESC>0i// <ESC><CR>
-nnoremap <leader>C <ESC>0i# <ESC><CR>
+" nnoremap <leader>c <ESC>0i// <ESC><CR>
+nnoremap <leader>c <ESC>0i# <ESC><CR>
 vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
+nnoremap ,t {jV}k:! tidy_table<cr>
 
-" latex shortcuts
-nnoremap <leader>p :w<cr>:!make pdf<cr><cr> 
 
 " using register f for quick macros and shortcuts \f 
 " record quick macros into reg f .... qf<keystrokes>q
@@ -128,6 +131,13 @@ nnoremap <leader>f @f
 nnoremap <leader>b :bn<cr>
 nnoremap <leader><space> :bn<cr>
 nnoremap <leader>w <c-w><c-w>
+
+" system clipboard yank/paste
+nnoremap <leader>p "+gP
+nnoremap <leader>P "+P
+imap <leader>p <ESC>"+gP
+imap <leader>P <ESC>"+P
+vmap <leader>y "+y
 
 " cheatsheet shortcuts
 autocmd BufReadPre $HOME/.vim/vim_sheet.md :syntax off | :nnoremap <buffer> ,, /^----<cr>:nohl<cr>zt |  nnoremap <buffer> ,c :syntax on<cr>:bd!<cr>
@@ -142,13 +152,11 @@ nnoremap ,c :view $HOME/.vim/vim_sheet.md<cr>
 "   F3 - insert date
 "   F4 - underline title with =
 "   F5 - underline title with - 
-"   F6 - wrap paragraph
-"   F7 - preview markdown
-"   F8 - start browswer with URL under cursor
+"   F6 - preview markdown as pdf
 
 " nmap <c-v> "+gP, bad idea as <ctrl-v> is used for block mode visual
-nmap <F2> "+gPA<ESC>
-imap <F2> <ESC>"+gPA<ESC>
+nmap <F2> "+gP
+imap <F2> <ESC>"+gP
 "
 " f3 insert todays date
 nnoremap <F3> "=strftime("%Y/%m/%d")<CR>P
@@ -158,21 +166,22 @@ inoremap <F3> <C-R>=strftime("%Y/%m/%d")<CR>
 nmap <F4> 0yypv$r=
 nmap <F5> 0yypv$r-
 "
-" reformt paragraph
-" this is pretty stupid and should be fixed
-nmap <F6> mZ{V}gq`Z
-"
-"
+" preview docmentation shortcuts
+nnoremap <F6> :w<cr>:!make pdf<cr><cr> 
+nnoremap <F7> :w<cr>:!make pdf<cr>:!make viewpdf<cr><cr> 
+
+
+
 " ------------------------------------------------------------
 " STRANGE STUFF
 " ------------------------------------------------------------
 " preview markdown
 " you need a makefile in the directory to convert md to html 
-nmap <F7> :w<CR>:!make preview PREVIEW=% &<CR><CR>:sleep 500m<CR><C-l>
+" nmap <F7> :w<CR>:!make preview PREVIEW=% &<CR><CR>:sleep 500m<CR><C-l>
 "
 " f8 start browser with the URL under the cursor
 " used in the reading list file to start browser
-nmap <F8> :.,.w !xargs -I {} firefox {} & <cr><cr>
+" nmap <F8> :.,.w !xargs -I {} firefox {} & <cr><cr>
 
 
 

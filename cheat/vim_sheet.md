@@ -120,12 +120,11 @@ Editing with Objects
 
     Commands: v c d y > < ! = gu gU gq
 
+\newpage
 
 Search and Replace
 ------------------
-search      [count]/{pattern}/{offset}
-
-substitute  {range}s/old/new/{flags}
+SEARCH      [count]/{pattern}/{offset}
 
     /pattern   search for pattern
     ?pattern   search backward for pattern
@@ -138,6 +137,7 @@ substitute  {range}s/old/new/{flags}
     %          find matching bracket {} [] ()
 
 
+SUBSTITUTE  {range}s/old/new/{flags}  
 :{range}s/old/new/{flags}
 
     flags: g-global c-confirm i-case insensitive
@@ -150,6 +150,17 @@ substitute  {range}s/old/new/{flags}
     :%s//new/g         replace last search item with new
     :.,+12s/old/new/g  replace all old with new on next 12 lines
     :1,.s/old/new/gc   from line 1 to current line with confirmations
+
+GLOBAL -- execute Ex command for each line matching pattern  
+:{range}g/pattern/cmd  
+
+    :g/pattern/d            Delete all lines that match pattern
+    :g/pattern/t$           Copy all lines matching a pattern to end of file
+    :g/pattern/m$           Move all lines matching a pattern to end of file
+    :g/pattern/m0           Move all lines matching a pattern to end of file
+    :g/pattern/normal @q    Run macro on matching lines 
+    :g!/pattern/d           Delete all lines that do not match pattern
+    :v/pattern/d            Ditto
 
 
 \newpage
@@ -194,6 +205,7 @@ Macros
     q   stop recording macro
     @a  run macro a
     @@  rerun last run macro
+    :g/pattern/normal @a    run macro on matching lines 
 
 
 \newpage
