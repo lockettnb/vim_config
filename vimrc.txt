@@ -18,6 +18,7 @@
 " 2018/12/15 mapped plus (+) to insert one space
 " 2019/02/13 autocmd for leader c comments in C files
 " 2019/03/18 added /p and /y for system clipboard put & yank
+" 2019/03/20 default list & number on, working with lot of makefile and markdown 
 "
 " ------------------------------------------------------------
 " SECTION ONE -- Options
@@ -56,9 +57,16 @@ call matchadd('ColorColumn', '\%81v', 100)
 set tabstop=4
 set shiftwidth=4
 set expandtab
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
-autocmd FileType c :source $HOME/.vim/snip.vim
-autocmd FileType c nnoremap <leader>c <ESC>0i// <ESC><CR>
+
+augroup vimrc_auto 
+if !exists("vimrc_auto_loaded")
+  let vimrc_auto_loaded = 1
+  autocmd vimrc_auto FileType make set noexpandtab shiftwidth=8 softtabstop=0
+  autocmd vimrc_auto FileType c :source $HOME/.vim/snip.vim
+  autocmd vimrc_auto FileType c nnoremap <leader>c <ESC>0i// <ESC><CR>
+  autocmd vimrc_auto FileType h nnoremap <leader>c <ESC>0i// <ESC><CR>
+  autocmd vimrc_auto FileType cpp nnoremap <leader>c <ESC>0i// <ESC><CR>
+endif
 
 " always have an extra line on bottom and top
 set scrolloff=1
@@ -66,13 +74,16 @@ set scrolloff=1
 " allow dirty buffers to be hidden
 set hidden
 
-" hidden characters tabs, spaces, eol
+" hidden characters tabs, spaces, eol, and turn them on
 exec "set listchars=tab:\ubb\ubb,eol:\ub6,trail:\ub7"
+set list
+set number
 
 " statusline
 set laststatus=2
 set statusline=%f%m%=%l:%-9c\ Lines:%-9L%5p%%
 highlight statusLine cterm=NONE ctermfg=7 ctermbg=4
+
 " ------------------------------------------------------------
 " SECTION TWO -- Functions
 " ------------------------------------------------------------
