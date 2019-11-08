@@ -1,7 +1,10 @@
 #
 # 2016/01/08 created
 # 2016/02/03 added first script
+# 2019/11/08 added VIM as install directory
 #
+
+VIM=$(HOME)/.vim
 
 CHEAT=vim_sheet.md
 CONF = vimrc.txt
@@ -13,12 +16,13 @@ all: vim
 
 vim:
 	cp $(CONF) $(HOME)/.vimrc
-	cp cheat/$(CHEAT) $(HOME)/.vim/$(CHEAT)
-	cp ./scripts/snip.vim $(HOME)/.vim/
-	cp ./scripts/quotes.vim $(HOME)/.vim/
-	cp ./scripts/toggle.vim $(HOME)/.vim/
+	mkdir -p $(VIM)
+	cp cheat/$(CHEAT) $(VIM)
+	cp ./scripts/snip.vim $(VIM)
+	cp ./scripts/quotes.vim $(VIM)
+	cp ./scripts/toggle.vim $(VIM)
 
 remove:
+	rm $(VIM)/$(CHEAT)
+	rm $(VIM)/*.vim
 	rm $(HOME)/.vimrc
-	rm $(HOME)/.vim/$(CHEAT)
-

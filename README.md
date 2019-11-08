@@ -32,7 +32,7 @@ web helper                       F8 - start browswer with URL under cursor
 
 Cheatsheet
 ----------
-The cheat directory has my personal cheatsheeti (vim_sheet.md).  Must be
+The cheat directory has my personal cheatsheet (vim_sheet.md).  Must be
 getting old as I find I need help remember vim bits. I have this linked to a
 key mapping ,c to quickly display it in the middle of a vim session.
 
