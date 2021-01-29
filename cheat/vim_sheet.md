@@ -61,7 +61,7 @@ Editing with Motions
     y  yy   yank
     >  >>   increase indent
     <  >>   decrease indent
-    !  !!   filter text lines throught external program:  !}fmt -72
+    !  !!   filter text lines throught external program:  !!fmt -72
     =  ==   filter text line through C-indenting program
     gu gugu lowercase, also guu for whole line
     gU gUgU uppercase, also gUU for whole line

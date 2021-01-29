@@ -134,7 +134,7 @@ nnoremap <leader>s :set spell!<CR>
 nnoremap <leader>c <ESC>0i# <ESC><CR>
 vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
-nnoremap ,t {jV}k:! tidy_table<cr>
+" nnoremap ,t {jV}k:! tidy_table<cr>
 nnoremap <leader>" dt"
 
 " using register f for quick macros and shortcuts \f 
