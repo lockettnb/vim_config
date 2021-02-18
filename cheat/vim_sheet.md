@@ -218,6 +218,7 @@ Windows and Buffers and Tabs
     :bprev or :bp  go to the previous buffer
     :bd            delete a buffer (close a file)
     :ls            list all open buffers
+    <ctrl>6        switch to alternate file
 
     :sp file       open a file in a new buffer and split window
     :vsp file      open a file in a new buffer and vertically split window
@@ -256,6 +257,7 @@ File Mangement
 
     :e .               explore files/directories
     :Explore           explore file/directories
+    :Vex               explore with vertical split
     :browse oldfiles   recent opened files
     :r[ead] {file}     insert the file below the cursor
 

@@ -3,7 +3,7 @@ Creating the VIM Cheatsheet
 ===========================
 
 I was looking for a cheatsheet to help me remember how to use text objects in
-vim.  I just couldn't seem to find just the right one.  I decided to create
+vim.  I just couldnt seem to find just the right one.  I decided to create
 my own and using markdown as the source with HTML and PDF as the output.
 
 So begins an adventure in using pandoc and latex.
@@ -39,7 +39,7 @@ I might as well write the whole thing in HTML as get lost in Latex Lane.
 
 And, again pandoc did not like these table packages. Under the hood pandoc uses
 the pdflatex program and a latex template to create the PDF. The template
-didn't support any of the Latex packages I wanted to use.
+did not support any of the Latex packages I wanted to use.
 
 Back to markdown with no tables.  As for markdown-to-pdf the pandoc latex
 template created weird margins and sections numbers.  However pandoc allows you
@@ -145,10 +145,10 @@ Output Documents
 Latex/Pandoc Install
 --------------------
 
-I didn't install the full Latex system. It is huge.  I only installed the Ubuntu
+I did not install the full Latex system. It is huge.  I only installed the Ubuntu
 recommend package and one extra package.
 
-I'm running Linux Mint so here are the commands
+I am running Linux Mint so here are the commands
 
     $ sudo apt-get install pandoc
     $ sudo apt-get install texlive 

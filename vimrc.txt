@@ -61,6 +61,8 @@ set expandtab
 " for some reason Debian has these off
 syntax on
 filetype on
+" to get the imgls file plugin to load
+filetype plugin on
 
 augroup vimrc_auto 
 if !exists("vimrc_auto_loaded")
@@ -88,6 +90,10 @@ set laststatus=2
 set statusline=%f%m%=%l:%-9c\ Lines:%-9L%5p%%
 highlight statusLine cterm=NONE ctermfg=7 ctermbg=4
 
+" File Explore settings, moved to toggle netrw script
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 25
+
 " ------------------------------------------------------------
 " SECTION TWO -- Functions
 " ------------------------------------------------------------
@@ -95,19 +101,25 @@ highlight statusLine cterm=NONE ctermfg=7 ctermbg=4
 source $HOME/.vim/toggle.vim
 " <leader> q for quoting a visual selection
 source $HOME/.vim/quotes.vim
+" file explorer toggle
+source $HOME/.vim/toggle_netrw.vim
 
 " ------------------------------------------------------------
 " SECTION THREE -- Key Mappings
 " ------------------------------------------------------------
 " FEW KEY ADJUSTMENTS
+"
 " extra escape key
 inoremap jj <ESC>
+"
 " extra eol
 "    2019/01/12 changed from L to K as I wanted L back
 "    normally K finds the man page for word under the cursor
 nnoremap K $
-" quick quit w/o write
-nnoremap QQ :q!<cr>
+"
+" quick quit w/o write, I never ever used this (2021/02/17)
+" nnoremap QQ :q!<cr>
+"
 " insert one space, love this one
 nnoremap + i <ESC>
 
@@ -126,26 +138,25 @@ nnoremap ]] ]]z<cr>kj
 "  c=C comment 
 "  C=shell comment 
 "  q=quote visual selection
-"  t=tidy current table
+"
 nnoremap <leader>m :call Togmouse()<CR>
 nnoremap <leader>n :call Tognums()<CR>
 nnoremap <leader>s :set spell!<CR>
-" nnoremap <leader>c <ESC>0i// <ESC><CR>
 nnoremap <leader>c <ESC>0i# <ESC><CR>
 vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
+nnoremap <leader>" dt"
+"
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
 " nnoremap ,t {jV}k:! tidy_table<cr>
-nnoremap <leader>" dt"
-
+"
 " using register f for quick macros and shortcuts \f 
-" record quick macros into reg f .... qf<keystrokes>q
-" then use \f to execute
 nnoremap <leader>f @f
 
 " buffer shortcuts 
 nnoremap <leader>b :bn<cr>
 nnoremap <leader><space> :bn<cr>
 nnoremap <leader>w <c-w><c-w>
+nnoremap <leader>t :tabn<cr>
 
 " system clipboard yank/paste
 nnoremap <leader>p "+gP
@@ -155,10 +166,12 @@ imap <leader>P <ESC>"+P
 vmap <leader>y "+y
 
 " cheatsheet shortcuts
+" when cheatsheet loaded: remap ,c to exit, map ,, to jump sections
 autocmd BufReadPre $HOME/.vim/vim_sheet.md :syntax off | :nnoremap <buffer> ,, /^----<cr>:nohl<cr>zt |  nnoremap <buffer> ,c :syntax on<cr>:bd!<cr>
 nnoremap ,c :view $HOME/.vim/vim_sheet.md<cr>
 
-
+" image list (imgls) file type
+autocmd BufRead,BufNewFile  *.imgls set filetype=imgls
 
 " ------------------------------------------------------------
 " SECTION FOUR -- Function Key Mappings
