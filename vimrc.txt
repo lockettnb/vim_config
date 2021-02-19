@@ -156,7 +156,9 @@ nnoremap <leader>f @f
 nnoremap <leader>b :bn<cr>
 nnoremap <leader><space> :bn<cr>
 nnoremap <leader>w <c-w><c-w>
-nnoremap <leader>t :tabn<cr>
+
+" you should use gt, gT
+" nnoremap <leader>t :tabn<cr>
 
 " system clipboard yank/paste
 nnoremap <leader>p "+gP
