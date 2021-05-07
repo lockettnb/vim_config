@@ -44,7 +44,8 @@ set smartcase
 " I seem to use this a lot so changed it to \\ for quick double tap
 set incsearch
 set showmatch
-set hlsearch
+" set hlsearch
+set nohlsearch
 nnoremap <leader>\ :nohlsearch<cr>
 
 " just the 81st column of wide lines
@@ -83,7 +84,14 @@ set hidden
 " hidden characters tabs, spaces, eol, and turn them on
 exec "set listchars=tab:\ubb\ubb,eol:\ub6,trail:\ub7"
 set list
-set number
+" set number
+set nonumber
+set relativenumber
+set nu
+
+" try this out
+set scrolloff=8
+set colorcolumn=80
 
 " statusline
 set laststatus=2
@@ -91,7 +99,7 @@ set statusline=%f%m%=%l:%-9c\ Lines:%-9L%5p%%
 highlight statusLine cterm=NONE ctermfg=7 ctermbg=4
 
 " File Explore settings, moved to toggle netrw script
-let g:netrw_browse_split = 4
+let g:netrw_browse_split = 0
 let g:netrw_winsize = 25
 
 " ------------------------------------------------------------
@@ -149,6 +157,9 @@ nnoremap <leader>" dt"
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
 " nnoremap ,t {jV}k:! tidy_table<cr>
 "
+nnoremap <leader>e :let g:netrw_browse_split=0<cr>:Explore<cr>
+nnoremap <leader>v :let g:netrw_browse_split=4<cr>:call ToggleVertExplorer()<cr>
+
 " using register f for quick macros and shortcuts \f 
 nnoremap <leader>f @f
 
@@ -161,11 +172,14 @@ nnoremap <leader>w <c-w><c-w>
 " nnoremap <leader>t :tabn<cr>
 
 " system clipboard yank/paste
-nnoremap <leader>p "+gP
-nnoremap <leader>P "+P
-imap <leader>p <ESC>"+gP
-imap <leader>P <ESC>"+P
-vmap <leader>y "+y
+" nnoremap <leader>p "+gP
+" nnoremap <leader>P "+P
+" imap <leader>p <ESC>"+gP
+" imap <leader>P <ESC>"+P
+" vmap <leader>y "+y
+vmap <leader>y :w !xsel -i -b<cr> 
+nnoremap <leader>p :r !xsel -o -b<cr> 
+nnoremap <leader>P k:r !xsel -o -b<cr> 
 
 " cheatsheet shortcuts
 " when cheatsheet loaded: remap ,c to exit, map ,, to jump sections

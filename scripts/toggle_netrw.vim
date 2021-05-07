@@ -22,5 +22,4 @@ function! ToggleVertExplorer()
 
 endfunction
 
-nmap <leader>v :call ToggleVertExplorer()<cr>
 

@@ -15,6 +15,7 @@ elseif &relativenumber
 else
     set nonumber
     set relativenumber
+    set nu
     set list
 endif
 
