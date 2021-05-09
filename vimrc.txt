@@ -48,9 +48,10 @@ set showmatch
 set nohlsearch
 nnoremap <leader>\ :nohlsearch<cr>
 
-" just the 81st column of wide lines
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+" highlight column 80 of wide lines
+set colorcolumn=81
+highlight ColorColumn ctermbg=239
+" call matchadd('ColorColumn', '\%81v', 100)
 
 " expand tab to 4 spaces 
 "   .....use :retab to fix up old files
@@ -90,8 +91,7 @@ set relativenumber
 set nu
 
 " try this out
-set scrolloff=8
-set colorcolumn=80
+set scrolloff=4
 
 " statusline
 set laststatus=2
