@@ -91,7 +91,7 @@ set relativenumber
 set nu
 
 " try this out
-set scrolloff=4
+set scrolloff=2
 
 " statusline
 set laststatus=2
@@ -157,6 +157,8 @@ nnoremap <leader>" dt"
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
 " nnoremap ,t {jV}k:! tidy_table<cr>
 "
+" lets keep hidden netrw directories to a minimum with slow browsing
+let g:netrw_fastbrowse=0
 nnoremap <leader>e :let g:netrw_browse_split=0<cr>:Explore<cr>
 nnoremap <leader>v :let g:netrw_browse_split=4<cr>:call ToggleVertExplorer()<cr>
 
@@ -204,7 +206,7 @@ imap <F2> <ESC>"+gP
 "
 " f3 insert todays date
 nnoremap <F3> "=strftime("%Y/%m/%d")<CR>P
-inoremap <F3> <C-R>=strftime("%Y/%m/%d")<CR> 
+inoremap <F3> <C-R>=strftime("%Y/%m/%d")<CR>
 "
 " f4 & f5 MARKDOWN underlines
 nmap <F4> 0yypv$r=
