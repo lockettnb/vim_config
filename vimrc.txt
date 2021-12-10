@@ -179,7 +179,13 @@ nnoremap <leader>w <c-w><c-w>
 " imap <leader>p <ESC>"+gP
 " imap <leader>P <ESC>"+P
 " vmap <leader>y "+y
-vmap <leader>y :w !xsel -i -b<cr> 
+"
+" OLD Method, only yanks full lines
+"vmap <leader>y :w !xsel -i -b<cr> 
+"
+" NEW fancy copy-to-clipboard 2021/12/10
+"  yank visual selection to register 0, echo register to xsel, redraw screen
+vmap <leader>y y:silent !echo '<c-r>0' <bar> xsel -i -b<cr><c-l>
 nnoremap <leader>p :r !xsel -o -b<cr> 
 nnoremap <leader>P k:r !xsel -o -b<cr> 
 
