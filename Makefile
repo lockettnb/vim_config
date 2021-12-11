@@ -25,6 +25,7 @@ vim:
 	cp ./scripts/toggle.vim $(VIM)
 	cp ./scripts/toggle_netrw.vim $(VIM)
 	cp ./scripts/imgls.vim $(PLUGIN)
+	cp ./scripts/clip.vim $(VIM)
 
 remove:
 	rm $(VIM)/$(CHEAT)
