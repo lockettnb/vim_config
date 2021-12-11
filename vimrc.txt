@@ -188,7 +188,7 @@ nnoremap <leader>w <c-w><c-w>
 " yank visual selection to register 0, echo register to xsel, redraw screen
 " vmap <leader>y y:silent !echo '<c-r>0' <bar> xsel -i -b<cr><c-l>
 " NEW copy-to-clipboard 2021/12/11
-vmap <leader>y y:silent call ClipIt()<cr><c-l>
+vmap <leader>y y:silent call ClipIt()<cr>
 
 nnoremap <leader>p :r !xsel -o -b<cr> 
 nnoremap <leader>P k:r !xsel -o -b<cr> 
