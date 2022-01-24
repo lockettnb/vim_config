@@ -44,9 +44,9 @@ set smartcase
 " I seem to use this a lot so changed it to \\ for quick double tap
 set incsearch
 set showmatch
-" set hlsearch
-set nohlsearch
-nnoremap <leader>\ :nohlsearch<cr>
+set hlsearch
+"set nohlsearch
+nnoremap <leader>\ :let @/=""<cr>
 
 " highlight column 80 of wide lines
 set colorcolumn=81
