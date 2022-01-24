@@ -85,10 +85,9 @@ set hidden
 " hidden characters tabs, spaces, eol, and turn them on
 exec "set listchars=tab:\ubb\ubb,eol:\ub6,trail:\ub7"
 set list
-" set number
-set nonumber
-set relativenumber
-set nu
+" set nonumber
+set number
+set norelativenumber
 
 " try this out
 set scrolloff=2
