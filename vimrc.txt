@@ -19,6 +19,8 @@
 " 2019/02/13 autocmd for leader c comments in C files
 " 2019/03/18 added /p and /y for system clipboard put & yank
 " 2019/03/20 default list & number on, working with lot of makefile and markdown 
+" 2022/01/28 changed K mapping to noremap only so it works in visual mode
+"
 "
 " ------------------------------------------------------------
 " SECTION ONE -- Options
@@ -124,7 +126,7 @@ inoremap jj <ESC>
 " extra eol
 "    2019/01/12 changed from L to K as I wanted L back
 "    normally K finds the man page for word under the cursor
-nnoremap K $
+noremap K $
 "
 " quick quit w/o write, I never ever used this (2021/02/17)
 " nnoremap QQ :q!<cr>
