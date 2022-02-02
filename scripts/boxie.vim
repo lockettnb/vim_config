@@ -15,7 +15,7 @@ vnoremap <buffer> ,x <ESC>:call DrawBox()<CR>
 " ARROWHEAD MAPPINGS
 " ◀  ▶  ▲  ▼
 nnoremap <buffer> ,<right>  r▶
-nnoremap <buffer> ,<left>  r▶
+nnoremap <buffer> ,<left>  r◀
 nnoremap <buffer> ,<up>  r▲
 nnoremap <buffer> ,<down>  r▼
 
