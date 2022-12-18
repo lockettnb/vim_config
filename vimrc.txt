@@ -20,6 +20,7 @@
 " 2019/03/18 added /p and /y for system clipboard put & yank
 " 2019/03/20 default list & number on, working with lot of makefile and markdown 
 " 2022/01/28 changed K mapping to noremap only so it works in visual mode
+" 2022/12/17 tired to remove formatoptions for auto-comments
 "
 "
 " ------------------------------------------------------------
@@ -40,6 +41,15 @@ set textwidth=0
 set ignorecase
 set smartcase
 
+" remove autocomment options
+" +need to set "fo-=cro" after other plugin scripts
+" + try :verb set fo? to see current settings
+" + try :verbose set f0 to see who sets the format options
+" + try :scriptnames to see the order the scripts run
+" + tried to created "after" script to override /usr/share/vim/vim90/ftplugin/
+"   but would need filetype script for all ft types.
+autocmd VimEnter * setlocal formatoptions-=cro
+
 " highlight search results (as you type) 
 " <leader>\ mapping makes it easy to hide search results
 " This gets rid of the distracting highlighting once you done with it
@@ -47,6 +57,7 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
+highlight search ctermbg=gray  ctermfg=red
 "set nohlsearch
 nnoremap <leader>\ :let @/=""<cr>
 
