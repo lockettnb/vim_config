@@ -71,12 +71,14 @@ Think of them as insert-def, insert-if etc etc
 
 
 
+movehelper.vim (2024/01/17)
+--------------
+Script to help move cursor to end-of-line and start-of-line and to middle.
+
+Mapping <crtl-right> to move to EOL, press againg to move to middle of line
+Mapping <crtl-left> to move to SOL, press againg to move to middle of line
+
+Simple jump to 0 or $ or on second press calculate middle of line and 
+move there.
 
 
-
-
-
-
-
-
-2018/01/15 
