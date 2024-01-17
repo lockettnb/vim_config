@@ -21,6 +21,8 @@
 " 2019/03/20 default list & number on, working with lot of makefile and markdown 
 " 2022/01/28 changed K mapping to noremap only so it works in visual mode
 " 2022/12/17 tired to remove formatoptions for auto-comments
+" 2023/03/10 change \v to \t for tree, mapped \v to vertical split w/ next buf
+" 2024/01/14 added movehelper script and key mappings
 "
 "
 " ------------------------------------------------------------
@@ -126,6 +128,8 @@ source $HOME/.vim/toggle_netrw.vim
 " clipboard functions
 source $HOME/.vim/clip.vim
 
+source $HOME/.vim/movehelper.vim
+
 " ------------------------------------------------------------
 " SECTION THREE -- Key Mappings
 " ------------------------------------------------------------
@@ -138,6 +142,8 @@ inoremap jj <ESC>
 "    2019/01/12 changed from L to K as I wanted L back
 "    normally K finds the man page for word under the cursor
 noremap K $
+nnoremap <C-Right> :call MoveItRight()<CR>
+nnoremap <C-Left>  :call MoveItLeft()<CR>
 "
 " quick quit w/o write, I never ever used this (2021/02/17)
 " nnoremap QQ :q!<cr>
@@ -174,7 +180,8 @@ nnoremap <leader>" dt"
 " lets keep hidden netrw directories to a minimum with slow browsing
 let g:netrw_fastbrowse=0
 nnoremap <leader>e :let g:netrw_browse_split=0<cr>:Explore<cr>
-nnoremap <leader>v :let g:netrw_browse_split=4<cr>:call ToggleVertExplorer()<cr>
+nnoremap <leader>t :let g:netrw_browse_split=4<cr>:call ToggleVertExplorer()<cr>
+nnoremap <leader>v :vs<cr>:bn<cr>
 
 " using register f for quick macros and shortcuts \f 
 nnoremap <leader>f @f
