@@ -141,7 +141,7 @@ inoremap jj <ESC>
 " extra eol
 "    2019/01/12 changed from L to K as I wanted L back
 "    normally K finds the man page for word under the cursor
-noremap K $
+noremap K :call MoveIt()<CR>
 nnoremap <C-Right> :call MoveItRight()<CR>
 nnoremap <C-Left>  :call MoveItLeft()<CR>
 "
