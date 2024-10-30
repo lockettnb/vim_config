@@ -23,6 +23,7 @@
 " 2022/12/17 tired to remove formatoptions for auto-comments
 " 2023/03/10 change \v to \t for tree, mapped \v to vertical split w/ next buf
 " 2024/01/14 added movehelper script and key mappings
+" 2024/10/30 cleanup and changed \\ mapping to next buffer
 "
 "
 " ------------------------------------------------------------
@@ -60,8 +61,8 @@ set incsearch
 set showmatch
 set hlsearch
 highlight search ctermbg=gray  ctermfg=red
-"set nohlsearch
-nnoremap <leader>\ :let @/=""<cr>
+"set nohlsearch, see key mappings for new map
+" nnoremap <leader>\ :let @/=""<cr>
 
 " highlight column 80 of wide lines
 set colorcolumn=81
@@ -137,10 +138,14 @@ source $HOME/.vim/movehelper.vim
 "
 " extra escape key
 inoremap jj <ESC>
+
+" minus key --> turn off highlighting from search
+nnoremap <leader>- :let @/=""<cr>
 "
 " extra eol
 "    2019/01/12 changed from L to K as I wanted L back
 "    normally K finds the man page for word under the cursor
+"    2024/01 new <shift>K --> right, middle, left jumps
 noremap K :call MoveIt()<CR>
 nnoremap <C-Right> :call MoveItRight()<CR>
 nnoremap <C-Left>  :call MoveItLeft()<CR>
@@ -155,8 +160,7 @@ nnoremap + i <ESC>
 nnoremap [[ [[z<cr>kj
 nnoremap ]] ]]z<cr>kj
 
-" make colon commands easier 2017/11/18 REMOVED
-" I never use this, too use to semi-colon
+" 2017/11/18 REMOVED I never use this, too use to semi-colon
 " nnoremap ; :
 " vnoremap ; :
 
@@ -172,11 +176,11 @@ nnoremap <leader>n :call Tognums()<CR>
 nnoremap <leader>s :set spell!<CR>
 nnoremap <leader>c <ESC>0i# <ESC><CR>
 vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
-nnoremap <leader>" dt"
+" nnoremap <leader>" dt"
 "
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
 " nnoremap ,t {jV}k:! tidy_table<cr>
-"
+
 " lets keep hidden netrw directories to a minimum with slow browsing
 let g:netrw_fastbrowse=0
 nnoremap <leader>e :let g:netrw_browse_split=0<cr>:Explore<cr>
@@ -188,27 +192,27 @@ nnoremap <leader>f @f
 
 " buffer shortcuts 
 nnoremap <leader>b :bn<cr>
-nnoremap <leader><space> :bn<cr>
 nnoremap <leader>w <c-w><c-w>
+" 2024/10/30 double \\ for quicker buffer next
+" nnoremap <leader><space> :bn<cr>
+nnoremap <leader>\ :bn<cr>
 
 " you should use gt, gT
 " nnoremap <leader>t :tabn<cr>
 
-" system clipboard yank/paste
-" nnoremap <leader>p "+gP
-" nnoremap <leader>P "+P
-" imap <leader>p <ESC>"+gP
-" imap <leader>P <ESC>"+P
-" vmap <leader>y "+y
-"
+" SYSTEM CLIPBOARD YANK/PASTE
+"   nnoremap <leader>p "+gP
+"   nnoremap <leader>P "+P
+"   imap <leader>p <ESC>"+gP
+"   imap <leader>P <ESC>"+P
+"   vmap <leader>y "+y
 " OLD Method, only yanks full lines
-"vmap <leader>y :w !xsel -i -b<cr> 
+"   vmap <leader>y :w !xsel -i -b<cr> 
 " OLD NEW fancy copy-to-clipboard 2021/12/10
-" yank visual selection to register 0, echo register to xsel, redraw screen
-" vmap <leader>y y:silent !echo '<c-r>0' <bar> xsel -i -b<cr><c-l>
+"    yank visual selection to register 0, echo register to xsel, redraw screen
+"    vmap <leader>y y:silent !echo '<c-r>0' <bar> xsel -i -b<cr><c-l>
 " NEW copy-to-clipboard 2021/12/11
 vmap <leader>y y:silent call ClipIt()<cr>
-
 nnoremap <leader>p :r !xsel -o -b<cr> 
 nnoremap <leader>P k:r !xsel -o -b<cr> 
 
@@ -217,8 +221,9 @@ nnoremap <leader>P k:r !xsel -o -b<cr>
 autocmd BufReadPre $HOME/.vim/vim_sheet.md :syntax off | :nnoremap <buffer> ,, /^----<cr>:nohl<cr>zt |  nnoremap <buffer> ,c :syntax on<cr>:bd!<cr>
 nnoremap ,c :view $HOME/.vim/vim_sheet.md<cr>
 
-" image list (imgls) file type
-autocmd BufRead,BufNewFile  *.imgls set filetype=imgls
+" 2024/10/30 I cannot remember what this was all about, commenting out
+"   image list (imgls) file type
+"   autocmd BufRead,BufNewFile  *.imgls set filetype=imgls
 
 " ------------------------------------------------------------
 " SECTION FOUR -- Function Key Mappings
@@ -240,20 +245,20 @@ inoremap <F3> <C-R>=strftime("%Y/%m/%d")<CR>
 " f4 & f5 MARKDOWN underlines
 nmap <F4> 0yypv$r=
 nmap <F5> 0yypv$r-
-"
-" preview docmentation shortcuts
-nnoremap <F6> :w<cr>:!make pdf<cr><cr> 
-nnoremap <F7> :w<cr>:!make pdf<cr>:!make viewpdf<cr><cr> 
 
 
 
 " ------------------------------------------------------------
 " STRANGE STUFF
 " ------------------------------------------------------------
+" preview docmentation shortcuts
+" nnoremap <F6> :w<cr>:!make pdf<cr><cr> 
+" nnoremap <F7> :w<cr>:!make pdf<cr>:!make viewpdf<cr><cr> 
+
 " preview markdown
 " you need a makefile in the directory to convert md to html 
 " nmap <F7> :w<CR>:!make preview PREVIEW=% &<CR><CR>:sleep 500m<CR><C-l>
-"
+
 " f8 start browser with the URL under the cursor
 " used in the reading list file to start browser
 " nmap <F8> :.,.w !xargs -I {} firefox {} & <cr><cr>
