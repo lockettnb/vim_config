@@ -1,15 +1,16 @@
 "
 " 2018/01/12 created
 " 2022/02/01 added box drawing and arrowheads
+" 2025/02/09 changed from Arrow key to ALT-Arrow keys for drawing lines
 
 let b:last_dir="right"
 
 " ARROW AND BOX MAPPINGS
 "   ,x -- draw box around visual selection
-nnoremap <buffer> <right>   :call RightArrow()<cr>
-nnoremap <buffer> <left>    :call LeftArrow()<cr>
-nnoremap <buffer> <up>      :call UpArrow()<cr>
-nnoremap <buffer> <down>    :call DownArrow()<cr>
+nnoremap <buffer> <A-right>   :call RightArrow()<cr>
+nnoremap <buffer> <A-left>    :call LeftArrow()<cr>
+nnoremap <buffer> <A-up>      :call UpArrow()<cr>
+nnoremap <buffer> <A-down>    :call DownArrow()<cr>
 vnoremap <buffer> ,x <ESC>:call DrawBox()<CR>
 
 " ARROWHEAD MAPPINGS

@@ -170,12 +170,14 @@ nnoremap ]] ]]z<cr>kj
 "  c=C comment 
 "  C=shell comment 
 "  q=quote visual selection
+"  b=load boxie drawing tools
 "
 nnoremap <leader>m :call Togmouse()<CR>
 nnoremap <leader>n :call Tognums()<CR>
 nnoremap <leader>s :set spell!<CR>
 nnoremap <leader>c <ESC>0i# <ESC><CR>
 vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
+nnoremap ,b :source ~/.vim/boxie.vim<CR>
 " nnoremap <leader>" dt"
 "
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
