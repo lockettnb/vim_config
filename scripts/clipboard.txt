@@ -1,0 +1,24 @@
+
+2025/03/02
+
++ Arch vim in compiled without clipboard support, this is why I have been
+  using xsel to copy/paste to the X clipboard.  Also with the mouse enabled
+  the Primary selection does not work.
+
++ vim Primary/Clipboard registers are missing when there is no +clipboard
+option compiled into the program
+    PRIMARY ("*)
+    CLIPBOARD ("+)
+
++ my current fancy clipboard copies text to new buffer then writes the buffer
+  to xsel .... however this messes up with split screen or when  help is open
+    |function! ClipIt()
+    |    :enew
+    |    :normal P
+    |    :silent %w ! xsel -ib
+    |    :bd!
+    |endfunction
+
++ new approch is to use shellescape() to handel all the complcated quoting 
+  stuff
+
