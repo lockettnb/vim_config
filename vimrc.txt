@@ -47,7 +47,7 @@ set smartcase
 " remove autocomment options
 " +need to set "fo-=cro" after other plugin scripts
 " + try :verb set fo? to see current settings
-" + try :verbose set f0 to see who sets the format options
+" + try :verbose set fo to see who sets the format options
 " + try :scriptnames to see the order the scripts run
 " + tried to created "after" script to override /usr/share/vim/vim90/ftplugin/
 "   but would need filetype script for all ft types.
@@ -165,19 +165,23 @@ nnoremap ]] ]]z<cr>kj
 " vnoremap ; :
 
 " MISC SHORTCUTS
-"  n=numbers and show hidden chars
-"  s=spell
-"  c=C comment 
-"  C=shell comment 
-"  q=quote visual selection
-"  b=load boxie drawing tools
+"  n=line Numbers
+"  s=Spell
+"  c=c Comment 
+"  C=shell Comment 
+"  q=Quote visual selection
+"  b=load Boxie drawing tools
+"  a=Align with vertical bar
 "
+vnoremap <leader>a :norm i<TAB>│<CR>
 nnoremap <leader>m :call Togmouse()<CR>
 nnoremap <leader>n :call Tognums()<CR>
 nnoremap <leader>s :set spell!<CR>
 nnoremap <leader>c <ESC>0i# <ESC><CR>
 vnoremap <buffer> <leader>q :<c-u>call QuoteIt()<cr><esc>
 nnoremap ,b :source ~/.vim/boxie.vim<CR>
+
+
 " nnoremap <leader>" dt"
 "
 " nnoremap <leader>t /<\*\*><cr>:nolsearch<cr>cf>
@@ -193,7 +197,8 @@ nnoremap <leader>v :vs<cr>:bn<cr>
 nnoremap <leader>f @f
 
 " buffer shortcuts 
-nnoremap <leader>b :bn<cr>
+" 2025/04/13 changing b to window-Buffer-swap
+nnoremap <leader>b <c-w>h:bn<cr><c-w>l:bn<cr>
 nnoremap <leader>w <c-w><c-w>
 " 2024/10/30 double \\ for quicker buffer next
 " nnoremap <leader><space> :bn<cr>
