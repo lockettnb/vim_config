@@ -24,7 +24,7 @@
 " 2023/03/10 change \v to \t for tree, mapped \v to vertical split w/ next buf
 " 2024/01/14 added movehelper script and key mappings
 " 2024/10/30 cleanup and changed \\ mapping to next buffer
-"
+" 2025/12/10 added modeline for rich_note exploration
 "
 " ------------------------------------------------------------
 " SECTION ONE -- Options
@@ -34,9 +34,12 @@
 set nocompatible
 set mouse=a
 set nobackup
-" set nowrap
-set nomodeline
 set textwidth=0
+" set nowrap
+
+" 2025/12/10 turning on modeline
+"set nomodeline
+set modeline
 
 " search case 
 " all-lowercase string your search will be case-insensitive
@@ -86,7 +89,7 @@ augroup vimrc_auto
 if !exists("vimrc_auto_loaded")
   let vimrc_auto_loaded = 1
   autocmd vimrc_auto FileType make set noexpandtab shiftwidth=8 softtabstop=0
-  autocmd vimrc_auto FileType c :source $HOME/.vim/snip.vim
+  autocmd vimrc_auto FileType c :source $HOME/.vim/scripts/snip.vim
   autocmd vimrc_auto FileType c nnoremap <leader>c <ESC>0i// <ESC><CR>
   autocmd vimrc_auto FileType h nnoremap <leader>c <ESC>0i// <ESC><CR>
   autocmd vimrc_auto FileType cpp nnoremap <leader>c <ESC>0i// <ESC><CR>
@@ -121,15 +124,15 @@ let g:netrw_winsize = 25
 " SECTION TWO -- Functions
 " ------------------------------------------------------------
 " <leader>n for numbers toggle, and <leader>m for mouse toggle
-source $HOME/.vim/toggle.vim
+source $HOME/.vim/scripts/toggle.vim
 " <leader> q for quoting a visual selection
-source $HOME/.vim/quotes.vim
+source $HOME/.vim/scripts/quotes.vim
 " file explorer toggle
-source $HOME/.vim/toggle_netrw.vim
+source $HOME/.vim/scripts/toggle_netrw.vim
 " clipboard functions
-source $HOME/.vim/clip.vim
+source $HOME/.vim/scripts/clip.vim
 
-source $HOME/.vim/movehelper.vim
+source $HOME/.vim/scripts/movehelper.vim
 
 " ------------------------------------------------------------
 " SECTION THREE -- Key Mappings
