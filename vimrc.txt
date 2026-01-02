@@ -235,6 +235,9 @@ nnoremap ,c :view $HOME/.vim/vim_sheet.md<cr>
 "   image list (imgls) file type
 "   autocmd BufRead,BufNewFile  *.imgls set filetype=imgls
 
+" 2026/01/02 txt note file detection
+autocmd BufRead,BufNewFile  *.txtn set filetype=txtn
+
 " ------------------------------------------------------------
 " SECTION FOUR -- Function Key Mappings
 " ------------------------------------------------------------

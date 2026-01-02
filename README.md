@@ -46,9 +46,9 @@ A few scripts that I use occasionally so they are not installed in my .vim
 directory.  I usually just :souce these files when I want to use one of these
 scripts.
 
-scripts/camel.vim   -- move around camel style and delete/yank/copy camel text objects  
-scripts/box.vim     -- draw text boxes using the arrow keys  
-scripts/tognum.vim  -- toggle numbers on/off/relative (also turns on/off hidden chars)  
+scripts/camel.vim   -- move around camel style and delete/yank/copy camel text objects
+scripts/box.vim     -- draw text boxes using the arrow keys
+scripts/toggle.vim  -- toggle numbers on/off/relative (also turns on/off hidden chars)
 
 scripts/showmd 
 -- not really vim script. Currently I use a make file to convert markdown
