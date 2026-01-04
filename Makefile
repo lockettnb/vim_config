@@ -36,9 +36,9 @@ vim:
 	cp $(CHEAT) $(VIM)
 	cp $(SCRIPT_SCR) $(SCRIPT_DIR)
 # 	cp $(PLUG_SCR) $(PLUG_DIR)
-	cp $(TXTNOTE_DIR)/txtn_syntax.vim $(SYNTAX_DIR)/txtn.vim
-	cp $(TXTNOTE_DIR)/txtn_plugin.vim $(PLUG_DIR)
-	cp $(TXTNOTE_DIR)/txtn_colour_marker.vim $(SCRIPT_DIR)
+	cp $(TXTNOTE_DIR)/nxx_syntax.vim $(SYNTAX_DIR)/nxx.vim
+	cp $(TXTNOTE_DIR)/nxx_plugin.vim $(PLUG_DIR)
+	cp $(TXTNOTE_DIR)/nxx_colour_marker.vim $(SCRIPT_DIR)
 
 #	cp ./scripts/snip.vim $(SCRIPT_DIR)
 #	cp ./scripts/quotes.vim $(SCRIPT_DIR)
