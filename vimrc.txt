@@ -63,7 +63,7 @@ autocmd VimEnter * setlocal formatoptions-=cro
 set incsearch
 set showmatch
 set hlsearch
-highlight search ctermbg=gray  ctermfg=red
+highlight search ctermbg=245  ctermfg=0
 "set nohlsearch, see key mappings for new map
 " nnoremap <leader>\ :let @/=""<cr>
 
